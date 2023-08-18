@@ -27,7 +27,7 @@ class FilamentVolition
     protected array $actions = [];
 
     /**
-     * @param array<class-string<\Squarebit\Volition\Contracts\Volitional>>|class-string<Volitional> $volitionals
+     * @param  array<class-string<\Squarebit\Volition\Contracts\Volitional>>|class-string<Volitional>  $volitionals
      * @return $this
      */
     public function registerVolitionals(array|string $volitionals): self
@@ -38,7 +38,7 @@ class FilamentVolition
     }
 
     /**
-     * @param array<int, class-string<IsFilamentCondition>>|class-string<IsFilamentAction> $condition
+     * @param  array<int, class-string<IsFilamentCondition>>|class-string<IsFilamentAction>  $condition
      * @return $this
      */
     public function registerConditions(array|string $condition): self
@@ -49,7 +49,7 @@ class FilamentVolition
     }
 
     /**
-     * @param array<int, class-string<IsFilamentAction>>|class-string<IsFilamentAction> $action
+     * @param  array<int, class-string<IsFilamentAction>>|class-string<IsFilamentAction>  $action
      * @return $this
      */
     public function registerActions(array|string $action): self
@@ -84,7 +84,7 @@ class FilamentVolition
     }
 
     /**
-     * @param array<int, IsFilamentElement> $payloads
+     * @param  array<int, IsFilamentElement>  $payloads
      * @return array<int, Block>
      */
     protected function getFilamentBlocksFor(array $payloads): array

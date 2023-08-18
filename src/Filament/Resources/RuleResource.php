@@ -10,7 +10,6 @@ use Filament\Tables\Table;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
-use Squarebit\Volition\Facades\Volition;
 use Squarebit\Volition\Models\Rule;
 
 class RuleResource extends Resource

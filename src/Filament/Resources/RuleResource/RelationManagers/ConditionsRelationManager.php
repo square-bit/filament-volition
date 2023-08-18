@@ -11,7 +11,6 @@ use Squarebit\FilamentVolition\Actions\CreateElementAction;
 use Squarebit\FilamentVolition\Actions\EditElementAction;
 use Squarebit\FilamentVolition\Contracts\IsFilamentCondition;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
-use Squarebit\Volition\Facades\Volition;
 use Squarebit\Volition\Models\Condition;
 
 class ConditionsRelationManager extends RelationManager

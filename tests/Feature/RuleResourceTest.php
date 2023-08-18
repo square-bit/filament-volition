@@ -1,15 +1,13 @@
 <?php
 
-use App\Providers\Filament\AdminPanelProvider;
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Testbench\Factories\UserFactory;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\CreateRule;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\EditRule;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\ListRules;
-use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers\ConditionsRelationManager;
-use Squarebit\FilamentVolition\Tests\Support\TestPanelProvider;
 use Squarebit\Volition\Database\Factories\RuleFactory;
 use Squarebit\Volition\Models\Rule;
+
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {

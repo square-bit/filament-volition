@@ -29,6 +29,6 @@ class ObjectPropertyCondition implements IsCondition, IsFilamentCondition
 
     public function validate(Volitional $object, bool $isValid): void
     {
-        return;
+
     }
 }
