@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Squarebit\FilamentVolition\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentVolitionCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-volition';
 
     public $description = 'My command';
 
