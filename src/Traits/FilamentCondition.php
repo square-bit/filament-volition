@@ -1,19 +1,13 @@
 <?php
 
-namespace Squarebit\FilamentVolition\Elements;
+namespace Squarebit\FilamentVolition\Traits;
 
 use Illuminate\Support\Str;
-use Squarebit\Volition\Facades\Volition;
 
 trait FilamentCondition
 {
     use FilamentElement {
         getLabel as getElementLabel;
-    }
-
-    public static function registerVolition(): void
-    {
-        Volition::registerConditions(static::class);
     }
 
     public static function getLabel(): string

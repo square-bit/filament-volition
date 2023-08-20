@@ -7,11 +7,10 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Squarebit\FilamentVolition\Actions\CreateElementAction;
-use Squarebit\FilamentVolition\Actions\EditElementAction;
 use Squarebit\FilamentVolition\Contracts\IsFilamentCondition;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
-use Squarebit\Volition\Facades\Volition;
+use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
+use Squarebit\FilamentVolition\Filament\Actions\EditElementAction;
 use Squarebit\Volition\Models\Condition;
 
 class ConditionsRelationManager extends RelationManager
@@ -22,18 +21,15 @@ class ConditionsRelationManager extends RelationManager
     {
         $schema = FilamentVolition::getFilamentBlocksForConditions();
 
-        return count($schema) === 0
-            ? $form
-            : $form
-                ->schema([
-                    Builder::make('payload')
-                        ->label(__('Condition type'))
-                        ->required()
-                        ->maxItems(1)
-                        ->blockNumbers(false)
-                        ->reorderable(false)
-                        ->blocks($schema),
-                ]);
+        return count($schema) === 0 ? $form : $form->schema([
+            Builder::make('payload')
+                ->label(__('Condition type'))
+                ->required()
+                ->maxItems(1)
+                ->blockNumbers(false)
+                ->reorderable(false)
+                ->blocks($schema),
+        ]);
     }
 
     public function table(Table $table): Table
@@ -46,6 +42,7 @@ class ConditionsRelationManager extends RelationManager
                     ->getStateUsing(fn (Condition $record) => $record->payload->__toString())
                     ->listWithLineBreaks()
                     ->bulleted(),
+                Tables\Columns\ToggleColumn::make('active'),
             ])
             ->filters([
                 //

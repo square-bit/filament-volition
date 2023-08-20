@@ -1,6 +1,6 @@
 <?php
 
-namespace Squarebit\FilamentVolition\Actions;
+namespace Squarebit\FilamentVolition\Filament\Actions;
 
 use Filament\Tables\Actions\EditAction;
 
@@ -10,10 +10,6 @@ class EditElementAction extends EditAction
     {
         return parent::make($name)
             ->mutateFormDataUsing(ElementPayloadActions::mutateFormDataCallable())
-            ->mutateRecordDataUsing(function (array $data): array {
-                $data['payload'] = $data['payload']->toFilamentFormData();
-
-                return $data;
-            });
+            ->mutateRecordDataUsing(ElementPayloadActions::mutateRecordDataCallable());
     }
 }

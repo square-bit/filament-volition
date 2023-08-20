@@ -1,6 +1,6 @@
 <?php
 
-namespace Squarebit\FilamentVolition\Elements;
+namespace Squarebit\FilamentVolition\Traits;
 
 trait FilamentElement
 {
@@ -20,10 +20,5 @@ trait FilamentElement
             'type' => $this::class,
             'data' => json_decode(json_encode($this), true),
         ]];
-    }
-
-    public static function getFilamentSchema(): ?array
-    {
-        return null;
     }
 }

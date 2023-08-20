@@ -1,6 +1,6 @@
 <?php
 
-namespace Squarebit\FilamentVolition\Actions;
+namespace Squarebit\FilamentVolition\Filament\Actions;
 
 use Filament\Tables\Actions\CreateAction;
 

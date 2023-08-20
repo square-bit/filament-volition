@@ -7,10 +7,10 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Squarebit\FilamentVolition\Actions\CreateElementAction;
-use Squarebit\FilamentVolition\Actions\EditElementAction;
-use Squarebit\FilamentVolition\Contracts\IsFilamentCondition;
-use Squarebit\Volition\Facades\Volition;
+use Squarebit\FilamentVolition\Contracts\IsFilamentAction;
+use Squarebit\FilamentVolition\Facades\FilamentVolition;
+use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
+use Squarebit\FilamentVolition\Filament\Actions\EditElementAction;
 use Squarebit\Volition\Models\Action;
 
 class ActionsRelationManager extends RelationManager
@@ -19,18 +19,15 @@ class ActionsRelationManager extends RelationManager
 
     public function form(Form $form): Form
     {
-        $schema = Volition::getFilamentBlocksForActions();
+        $schema = FilamentVolition::getFilamentBlocksForActions();
 
-        return count($schema) === 0
-            ? $form
-            : $form
-                ->schema([
-                    Builder::make('payload')
-                        ->required()
-                        ->maxItems(1)
-                        ->reorderable(false)
-                        ->blocks($schema),
-                ]);
+        return count($schema) === 0 ? $form : $form->schema([
+            Builder::make('payload')
+                ->required()
+                ->maxItems(1)
+                ->reorderable(false)
+                ->blocks($schema),
+        ]);
     }
 
     public function table(Table $table): Table
@@ -38,17 +35,17 @@ class ActionsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('payload')
-                    ->formatStateUsing(fn (IsFilamentCondition $state) => $state->getLabel()),
+                    ->formatStateUsing(fn (IsFilamentAction $state) => $state->getLabel()),
                 Tables\Columns\TextColumn::make('condition')
                     ->getStateUsing(fn (Action $record) => $record->payload->__toString())
                     ->listWithLineBreaks()
                     ->bulleted(),
+                Tables\Columns\ToggleColumn::make('active'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make('aaa')->label('a'),
                 CreateElementAction::make(),
             ])
             ->actions([

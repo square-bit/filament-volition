@@ -10,7 +10,6 @@ use Filament\Tables\Table;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
-use Squarebit\Volition\Facades\Volition;
 use Squarebit\Volition\Models\Rule;
 
 class RuleResource extends Resource
@@ -19,13 +18,16 @@ class RuleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $slug = 'volition';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
                 Forms\Components\Select::make('applies_to')
-                    ->label(__('Volitional'))
+                    ->translateLabel()
                     ->required()
                     ->options(array_combine(FilamentVolition::volitionals(), FilamentVolition::volitionals())),
             ]);

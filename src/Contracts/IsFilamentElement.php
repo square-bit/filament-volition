@@ -11,4 +11,6 @@ interface IsFilamentElement
     public static function fromFilamentFormData(array $data): static;
 
     public function toFilamentFormData(): array;
+
+    public function __toString(): string;
 }
