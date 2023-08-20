@@ -30,7 +30,7 @@ class ObjectPropertyCondition implements IsCondition, IsFilamentCondition
 
     public function validate(Volitional $object, bool $isValid): void
     {
-
+        // You can throw an exception here
     }
 
     public static function getFilamentSchema(): ?array
