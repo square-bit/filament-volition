@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Squarebit\FilamentVolition\Contracts\IsFilamentCondition;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
@@ -17,13 +18,19 @@ class ConditionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'conditions';
 
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->conditions->count();
+    }
+
     public function form(Form $form): Form
     {
         $schema = FilamentVolition::getFilamentBlocksForConditions();
 
         return count($schema) === 0 ? $form : $form->schema([
             Builder::make('payload')
-                ->label(__('Condition type'))
+                ->addActionLabel(__('Add'))
+                ->hiddenLabel()
                 ->required()
                 ->maxItems(1)
                 ->blockNumbers(false)

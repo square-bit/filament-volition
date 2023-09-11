@@ -16,10 +16,6 @@ class RuleResource extends Resource
 {
     protected static ?string $model = Rule::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $slug = 'volition';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -37,7 +33,17 @@ class RuleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('applies_to')->searchable(),
+                Tables\Columns\TextColumn::make('conditions')
+                    ->label(__('Conditions'))
+                    ->badge()
+                    ->getStateUsing(fn (Rule $record) => $record->conditions->count()),
+                Tables\Columns\TextColumn::make('actions')
+                    ->label(__('Actions'))
+                    ->badge()
+                    ->getStateUsing(fn (Rule $record) => $record->actions->count()),
+
             ])
             ->filters([
                 //
@@ -72,8 +78,18 @@ class RuleResource extends Resource
         ];
     }
 
+    public static function getNavigationIcon(): ?string
+    {
+        return config('filament-volition.navigation-icon');
+    }
+
     public static function getNavigationGroup(): ?string
     {
-        return __('Rules');
+        return config('filament-volition.navigation-group');
+    }
+
+    public static function getSlug(): string
+    {
+        return config('filament-volition.slug', 'volition');
     }
 }

@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Squarebit\FilamentVolition\Contracts\IsFilamentAction;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
@@ -17,14 +18,22 @@ class ActionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'actions';
 
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->actions->count();
+    }
+
     public function form(Form $form): Form
     {
         $schema = FilamentVolition::getFilamentBlocksForActions();
 
         return count($schema) === 0 ? $form : $form->schema([
             Builder::make('payload')
+                ->addActionLabel(__('Add'))
+                ->hiddenLabel()
                 ->required()
                 ->maxItems(1)
+                ->blockNumbers(false)
                 ->reorderable(false)
                 ->blocks($schema),
         ]);
