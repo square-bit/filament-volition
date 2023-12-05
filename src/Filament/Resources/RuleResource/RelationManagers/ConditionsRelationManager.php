@@ -46,9 +46,7 @@ class ConditionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('payload')
                     ->formatStateUsing(fn (IsFilamentCondition $state) => $state->getLabel()),
                 Tables\Columns\TextColumn::make('condition')
-                    ->getStateUsing(fn (Condition $record) => $record->payload->__toString())
-                    ->listWithLineBreaks()
-                    ->bulleted(),
+                    ->getStateUsing(fn (Condition $record) => $record->payload->__toString()),
                 Tables\Columns\ToggleColumn::make('active'),
             ])
             ->filters([

@@ -46,9 +46,7 @@ class ActionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('payload')
                     ->formatStateUsing(fn (IsFilamentAction $state) => $state->getLabel()),
                 Tables\Columns\TextColumn::make('condition')
-                    ->getStateUsing(fn (Action $record) => $record->payload->__toString())
-                    ->listWithLineBreaks()
-                    ->bulleted(),
+                    ->getStateUsing(fn (Action $record) => $record->payload->__toString()),
                 Tables\Columns\ToggleColumn::make('active'),
             ])
             ->filters([
