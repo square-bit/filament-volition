@@ -6,7 +6,7 @@ use Filament\Tables\Actions\EditAction;
 
 class EditElementAction extends EditAction
 {
-    public static function make(string $name = null): static
+    public static function make(?string $name = null): static
     {
         return parent::make($name)
             ->mutateFormDataUsing(ElementPayloadActions::mutateFormDataCallable())

@@ -30,9 +30,9 @@ class FilamentVolition
      * <<<<<<< HEAD
      *
      * @param  array<class-string<Volitional>>|class-string<Volitional>  $volitionals
-     * =======
+     *                                                                                 =======
      * @param  array<class-string<\Squarebit\Volition\Contracts\Volitional>>|class-string<Volitional>  $volitionals
-     * >>>>>>> 232f5c049dfc88686fd26b8f84f817435237c68e
+     *                                                                                                               >>>>>>> 232f5c049dfc88686fd26b8f84f817435237c68e
      * @return $this
      */
     public function registerVolitionals(array|string $volitionals): self
