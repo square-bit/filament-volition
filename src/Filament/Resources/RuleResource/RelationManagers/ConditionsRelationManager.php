@@ -43,9 +43,11 @@ class ConditionsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('condition')
+                Tables\Columns\TextColumn::make('payload')
+                    ->label(__('Condition'))
                     ->formatStateUsing(fn (IsFilamentCondition $state) => $state->getLabel()),
-                Tables\Columns\TextColumn::make('parameters')
+                Tables\Columns\TextColumn::make('condition')
+                    ->label(__('Parameters'))
                     ->listWithLineBreaks(
                         fn (Condition $record) => count(explode(PHP_EOL, $record->payload->__toString())) > 1
                     )
