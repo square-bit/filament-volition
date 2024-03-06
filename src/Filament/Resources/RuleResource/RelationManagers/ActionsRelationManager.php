@@ -43,10 +43,13 @@ class ActionsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('payload')
+                Tables\Columns\TextColumn::make('action')
                     ->formatStateUsing(fn (IsFilamentAction $state) => $state->getLabel()),
-                Tables\Columns\TextColumn::make('condition')
-                    ->getStateUsing(fn (Action $record) => $record->payload->__toString()),
+                Tables\Columns\TextColumn::make('parameters')
+                    ->listWithLineBreaks(
+                        fn (Action $record) => count(explode(PHP_EOL, $record->payload->__toString())) > 1
+                    )
+                    ->getStateUsing(fn (Action $record) => explode(PHP_EOL, $record->payload->__toString())),
                 Tables\Columns\ToggleColumn::make('active'),
             ])
             ->filters([
