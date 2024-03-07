@@ -94,14 +94,17 @@ class FilamentVolition
      */
     protected function getFilamentBlocksFor(array $payloads): array
     {
-        return array_filter(array_map(function (string $payloadClass): ?Block {
-            $schema = $payloadClass::getFilamentSchema();
+        return collect($payloads)
+            ->map(function (string $payloadClass) {
+                $schema = $payloadClass::getFilamentSchema();
 
-            return $schema === null ? null : Block::make($payloadClass)
-                ->label($payloadClass::getLabel())
-                ->schema($schema);
-        }, $payloads
-        ));
+                return $schema === null ? null : Block::make($payloadClass)
+                    ->label($payloadClass::getLabel())
+                    ->schema($schema);
+            })
+            ->filter()
+            ->sortBy(fn (Block $block) => $block->getLabel())
+            ->all();
     }
 
     /**
