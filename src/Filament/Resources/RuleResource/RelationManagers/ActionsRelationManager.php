@@ -30,10 +30,12 @@ class ActionsRelationManager extends RelationManager
         return count($schema) === 0 ? $form : $form->schema([
             Builder::make('payload')
                 ->addActionLabel(__('Add'))
-                ->hiddenLabel()
-                ->columnSpanFull()
                 ->required()
                 ->maxItems(1)
+                ->hiddenLabel()
+                ->columnSpanFull()
+                ->blockPickerWidth('xl')
+                ->blockPickerColumns(2)
                 ->blockNumbers(false)
                 ->reorderable(false)
                 ->blocks($schema),
