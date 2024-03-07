@@ -31,6 +31,7 @@ class ConditionsRelationManager extends RelationManager
             Builder::make('payload')
                 ->addActionLabel(__('Add'))
                 ->hiddenLabel()
+                ->columnSpanFull()
                 ->required()
                 ->maxItems(1)
                 ->blockNumbers(false)
