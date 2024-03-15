@@ -55,7 +55,7 @@ class ConditionsRelationManager extends RelationManager
                         fn (Condition $record) => count(explode(PHP_EOL, $record->payload->__toString())) > 1
                     )
                     ->getStateUsing(fn (Condition $record) => explode(PHP_EOL, $record->payload->__toString())),
-                Tables\Columns\ToggleColumn::make('active'),
+                Tables\Columns\ToggleColumn::make('enabled'),
             ])
             ->filters([
                 //

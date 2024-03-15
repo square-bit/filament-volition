@@ -55,7 +55,7 @@ class ActionsRelationManager extends RelationManager
                         fn (Action $record) => count(explode(PHP_EOL, $record->payload->__toString())) > 1
                     )
                     ->getStateUsing(fn (Action $record) => explode(PHP_EOL, $record->payload->__toString())),
-                Tables\Columns\ToggleColumn::make('active'),
+                Tables\Columns\ToggleColumn::make('enabled'),
             ])
             ->filters([
                 //
