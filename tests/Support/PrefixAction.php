@@ -18,8 +18,7 @@ class PrefixAction implements IsAction, IsFilamentAction
 
     public function __construct(
         public string $prefix = ''
-    ) {
-    }
+    ) {}
 
     /**
      * @param  TestObject  $object

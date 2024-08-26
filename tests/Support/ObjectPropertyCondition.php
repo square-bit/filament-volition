@@ -15,8 +15,7 @@ class ObjectPropertyCondition implements IsCondition, IsFilamentCondition
     public function __construct(
         public string $property,
         public mixed $value,
-    ) {
-    }
+    ) {}
 
     public function passes(object $object): bool
     {
