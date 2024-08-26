@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
@@ -15,6 +16,12 @@ use Squarebit\Volition\Models\Rule;
 class RuleResource extends Resource
 {
     protected static ?string $model = Rule::class;
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withCount(['conditions', 'actions']);
+    }
 
     public static function form(Form $form): Form
     {
@@ -38,11 +45,11 @@ class RuleResource extends Resource
                 Tables\Columns\TextColumn::make('conditions')
                     ->label(__('Conditions'))
                     ->badge()
-                    ->getStateUsing(fn (Rule $record) => $record->conditions->count()),
+                    ->getStateUsing(fn (Rule $record) => $record->conditions_count),
                 Tables\Columns\TextColumn::make('actions')
                     ->label(__('Actions'))
                     ->badge()
-                    ->getStateUsing(fn (Rule $record) => $record->actions->count()),
+                    ->getStateUsing(fn (Rule $record) => $record->actions_count),
 
             ])
             ->filters([
