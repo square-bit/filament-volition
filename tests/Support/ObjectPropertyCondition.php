@@ -7,10 +7,12 @@ use Squarebit\FilamentVolition\Contracts\IsFilamentCondition;
 use Squarebit\FilamentVolition\Traits\FilamentCondition;
 use Squarebit\Volition\Contracts\IsCondition;
 use Squarebit\Volition\Contracts\Volitional;
+use Squarebit\Volition\Traits\VolitionElement;
 
 class ObjectPropertyCondition implements IsCondition, IsFilamentCondition
 {
     use FilamentCondition;
+    use VolitionElement;
 
     public function __construct(
         public string $property,

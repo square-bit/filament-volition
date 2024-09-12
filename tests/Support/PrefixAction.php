@@ -7,6 +7,7 @@ use Squarebit\FilamentVolition\Contracts\IsFilamentAction;
 use Squarebit\FilamentVolition\Traits\FilamentAction;
 use Squarebit\Volition\Contracts\IsAction;
 use Squarebit\Volition\Exception\ActionExecutionException;
+use Squarebit\Volition\Traits\VolitionElement;
 use Throwable;
 
 /**
@@ -15,6 +16,7 @@ use Throwable;
 class PrefixAction implements IsAction, IsFilamentAction
 {
     use FilamentAction;
+    use VolitionElement;
 
     public function __construct(
         public string $prefix = ''

@@ -11,12 +11,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
+use Squarebit\Volition\Models\Queries\RuleQuery;
 use Squarebit\Volition\Models\Rule;
 
 class RuleResource extends Resource
 {
     protected static ?string $model = Rule::class;
 
+    /**
+     * @return Builder<Rule>
+     */
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

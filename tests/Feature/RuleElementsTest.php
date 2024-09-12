@@ -13,6 +13,7 @@ use Squarebit\FilamentVolition\Tests\Support\PrefixAction;
 use Squarebit\FilamentVolition\Tests\Support\SuffixAction;
 use Squarebit\FilamentVolition\Tests\Support\TestObject;
 use Squarebit\Volition\Database\Factories\RuleFactory;
+use Squarebit\Volition\Facades\Volition;
 use Squarebit\Volition\Models\Action;
 
 use function Pest\Livewire\livewire;
@@ -20,9 +21,11 @@ use function Pest\Livewire\livewire;
 beforeEach(function () {
     Auth::loginUsingId(UserFactory::new()->create()->id);
 
-    FilamentVolition::registerConditions(ObjectPropertyCondition::class);
-    FilamentVolition::registerActions(PrefixAction::class);
-    FilamentVolition::registerActions(SuffixAction::class);
+    Volition::registerConditions([ObjectPropertyCondition::class]);
+    Volition::registerActions([
+        PrefixAction::class,
+        SuffixAction::class,
+    ]);
 });
 
 test('can list conditions', function () {
@@ -86,7 +89,8 @@ test('can list and create actions', function () {
         ->callMountedTableAction()
         ->assertHasNoActionErrors();
 
-    expect($rule->actions->last()->payload->suffix)->toBe('some_suffix');
+    expect($rule->actions->count())->toBe(2)
+        ->and($rule->actions->last()->payload->suffix)->toBe('some_suffix');
 });
 
 test('can edit actions', function () {

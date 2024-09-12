@@ -17,12 +17,12 @@
         }
     ],
     "require": {
-        "php": "^8.1|^8.2",
+        "php": "^8.2|^8.3",
         "filament/filament": "^3",
-        "illuminate/contracts": "^10.0",
+        "illuminate/contracts": "^10.0|^11.0",
         "spatie/laravel-package-tools": "^1.14.0",
         "spatie/laravel-permission": "^5.10",
-        "square-bit/laravel-volition": "^1.0"
+        "square-bit/laravel-volition": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",

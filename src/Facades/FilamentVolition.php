@@ -2,6 +2,7 @@
 
 namespace Squarebit\FilamentVolition\Facades;
 
+use Filament\Forms\Components\Builder\Block;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -13,8 +14,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static array volitionals()
  * @method static array conditions()
  * @method static array actions()
- * @method static array getFilamentBlocksForConditions()
- * @method static array getFilamentBlocksForActions()
+ * @method static array<int, Block> getFilamentBlocksForConditions()
+ * @method static array<int, Block> getFilamentBlocksForActions()
  */
 class FilamentVolition extends Facade
 {
