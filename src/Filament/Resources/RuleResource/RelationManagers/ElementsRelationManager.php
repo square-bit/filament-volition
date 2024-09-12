@@ -9,10 +9,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Squarebit\FilamentVolition\Contracts\IsFilamentElement;
-use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
 use Squarebit\FilamentVolition\Filament\Actions\EditElementAction;
-use Squarebit\Volition\Models\Action;
 use Squarebit\Volition\Models\Element;
 
 abstract class ElementsRelationManager extends RelationManager

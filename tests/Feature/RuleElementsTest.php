@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Testbench\Factories\UserFactory;
-use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
 use Squarebit\FilamentVolition\Filament\Actions\EditElementAction;
 use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\EditRule;

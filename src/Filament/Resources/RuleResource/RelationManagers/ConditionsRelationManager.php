@@ -2,7 +2,6 @@
 
 namespace Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
 
-use Filament\Forms\Components\Builder\Block;
 use Illuminate\Database\Eloquent\Model;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
 use Squarebit\Volition\Models\Rule;
@@ -15,6 +14,7 @@ class ConditionsRelationManager extends ElementsRelationManager
     {
         return FilamentVolition::getFilamentBlocksForConditions();
     }
+
     /**
      * @param  Rule  $ownerRecord
      */

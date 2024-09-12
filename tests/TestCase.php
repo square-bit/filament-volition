@@ -31,7 +31,7 @@ class TestCase extends Orchestra
 
         $this->actingAs(UserFactory::new()->create(['email' => 'test@user.com']));
 
-        foreach(glob(__DIR__.'/../vendor/square-bit/laravel-volition/database/migrations/*.*') as $migrationFile) {
+        foreach (glob(__DIR__.'/../vendor/square-bit/laravel-volition/database/migrations/*.*') as $migrationFile) {
             $migration = include $migrationFile;
             $migration->up();
         }

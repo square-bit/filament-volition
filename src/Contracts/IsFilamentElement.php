@@ -15,12 +15,11 @@ interface IsFilamentElement
 
     /**
      * @param  array<string, mixed>  $data
-     * @return static
      */
     public static function fromFilamentFormData(array $data): static;
 
     /**
-     * @return  array<string, mixed>
+     * @return array<string, mixed>
      */
     public function toFilamentFormData(): array;
 
