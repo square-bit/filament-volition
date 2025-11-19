@@ -2,15 +2,24 @@
 
 namespace Squarebit\FilamentVolition\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Panel;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Squarebit\FilamentVolition\Facades\FilamentVolition;
-use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages;
-use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
+use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\CreateRule;
+use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\EditRule;
+use Squarebit\FilamentVolition\Filament\Resources\RuleResource\Pages\ListRules;
+use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers\ActionsRelationManager;
+use Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers\ConditionsRelationManager;
 use Squarebit\Volition\Models\Rule;
 
 class RuleResource extends Resource
@@ -26,13 +35,13 @@ class RuleResource extends Resource
             ->withCount(['conditions', 'actions']);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->required(),
-                Forms\Components\Select::make('applies_to')
+                Select::make('applies_to')
                     ->translateLabel()
                     ->required()
                     ->options(array_combine(FilamentVolition::volitionals(), FilamentVolition::volitionals())),
@@ -43,13 +52,13 @@ class RuleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('applies_to')->searchable(),
-                Tables\Columns\TextColumn::make('conditions')
+                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('applies_to')->searchable(),
+                TextColumn::make('conditions')
                     ->label(__('Conditions'))
                     ->badge()
                     ->getStateUsing(fn (Rule $record) => $record->conditions_count),
-                Tables\Columns\TextColumn::make('actions')
+                TextColumn::make('actions')
                     ->label(__('Actions'))
                     ->badge()
                     ->getStateUsing(fn (Rule $record) => $record->actions_count),
@@ -58,33 +67,33 @@ class RuleResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ConditionsRelationManager::class,
-            RelationManagers\ActionsRelationManager::class,
+            ConditionsRelationManager::class,
+            ActionsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRules::route('/'),
-            'create' => Pages\CreateRule::route('/create'),
-            'edit' => Pages\EditRule::route('/{record}/edit'),
+            'index' => ListRules::route('/'),
+            'create' => CreateRule::route('/create'),
+            'edit' => EditRule::route('/{record}/edit'),
         ];
     }
 
@@ -98,7 +107,7 @@ class RuleResource extends Resource
         return config('filament-volition.navigation-group');
     }
 
-    public static function getSlug(): string
+    public static function getSlug(?Panel $panel = null): string
     {
         return config('filament-volition.slug', 'volition');
     }

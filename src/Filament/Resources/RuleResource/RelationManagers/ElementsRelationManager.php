@@ -2,11 +2,14 @@
 
 namespace Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
 
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Squarebit\FilamentVolition\Contracts\IsFilamentElement;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
@@ -20,11 +23,11 @@ abstract class ElementsRelationManager extends RelationManager
      */
     abstract protected function getBlocks(): array;
 
-    public function form(Form $form): Form
+    public function form(Schema $form): Schema
     {
         $schema = $this->getBlocks();
 
-        return count($schema) === 0 ? $form : $form->schema([
+        return count($schema) === 0 ? $form : $form->components([
             Builder::make('payload')
                 ->addActionLabel(__('Add'))
                 ->required()
@@ -43,10 +46,10 @@ abstract class ElementsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('payload')
+                TextColumn::make('payload')
                     ->label(__('Element'))
                     ->formatStateUsing(fn (IsFilamentElement $state) => $state->getLabel()),
-                Tables\Columns\TextColumn::make('condition')
+                TextColumn::make('condition')
                     ->label(__('Parameters'))
                     ->listWithLineBreaks(function (Element $record) {
                         /** @var IsFilamentElement $payload */
@@ -60,7 +63,7 @@ abstract class ElementsRelationManager extends RelationManager
 
                         return explode(PHP_EOL, $payload->__toString());
                     }),
-                Tables\Columns\ToggleColumn::make('enabled'),
+                ToggleColumn::make('enabled'),
             ])
             ->filters([
                 //
@@ -68,12 +71,12 @@ abstract class ElementsRelationManager extends RelationManager
             ->headerActions([
                 CreateElementAction::make(),
             ])
-            ->actions([
+            ->recordActions([
                 EditElementAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([

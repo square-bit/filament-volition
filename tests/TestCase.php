@@ -8,6 +8,7 @@ use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
@@ -44,8 +45,8 @@ class TestCase extends Orchestra
             FilamentVolitionServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
             BladeIconsServiceProvider::class,
-            LivewireServiceProvider::class,
             FilamentServiceProvider::class,
+            SchemasServiceProvider::class,
             FormsServiceProvider::class,
             ActionsServiceProvider::class,
             WidgetsServiceProvider::class,
@@ -54,14 +55,15 @@ class TestCase extends Orchestra
             TablesServiceProvider::class,
             BladeCaptureDirectiveServiceProvider::class,
             TestPanelProvider::class,
+            LivewireServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
-        config()->set('database.connections.sqlite', [
+        config()->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
@@ -74,5 +76,10 @@ class TestCase extends Orchestra
     protected function defineDatabaseMigrations(): void
     {
         $this->loadLaravelMigrations();
+    }
+
+    protected function defineDatabaseMigrationsAfterDatabaseRefreshed()
+    {
+        $this->defineDatabaseMigrations();
     }
 }

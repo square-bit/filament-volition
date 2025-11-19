@@ -9,7 +9,7 @@ beforeEach(function () {
 });
 
 test('can has menu', function () {
-    $this->get(Filament::getHomeUrl())
+    $this->get(Filament::getHomeUrl().'/volition')
         ->assertSuccessful()
         ->assertSee('Rules');
 });
