@@ -2,15 +2,14 @@
 
 namespace Squarebit\FilamentVolition\Filament\Resources\RuleResource\RelationManagers;
 
-use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Squarebit\FilamentVolition\Contracts\IsFilamentElement;
 use Squarebit\FilamentVolition\Filament\Actions\CreateElementAction;
