@@ -57,11 +57,11 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
-        config()->set('database.connections.sqlite', [
+        config()->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
@@ -74,5 +74,10 @@ class TestCase extends Orchestra
     protected function defineDatabaseMigrations(): void
     {
         $this->loadLaravelMigrations();
+    }
+
+    protected function defineDatabaseMigrationsAfterDatabaseRefreshed()
+    {
+        $this->defineDatabaseMigrations();
     }
 }

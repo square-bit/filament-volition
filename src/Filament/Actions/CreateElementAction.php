@@ -2,7 +2,7 @@
 
 namespace Squarebit\FilamentVolition\Filament\Actions;
 
-use Filament\Tables\Actions\CreateAction;
+use Filament\Actions\CreateAction;
 
 class CreateElementAction extends CreateAction
 {

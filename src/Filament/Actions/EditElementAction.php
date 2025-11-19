@@ -2,7 +2,7 @@
 
 namespace Squarebit\FilamentVolition\Filament\Actions;
 
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\EditAction;
 
 class EditElementAction extends EditAction
 {
