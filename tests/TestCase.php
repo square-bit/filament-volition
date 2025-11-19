@@ -8,6 +8,7 @@ use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
@@ -44,8 +45,8 @@ class TestCase extends Orchestra
             FilamentVolitionServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
             BladeIconsServiceProvider::class,
-            LivewireServiceProvider::class,
             FilamentServiceProvider::class,
+            SchemasServiceProvider::class,
             FormsServiceProvider::class,
             ActionsServiceProvider::class,
             WidgetsServiceProvider::class,
@@ -54,6 +55,7 @@ class TestCase extends Orchestra
             TablesServiceProvider::class,
             BladeCaptureDirectiveServiceProvider::class,
             TestPanelProvider::class,
+            LivewireServiceProvider::class,
         ];
     }
 

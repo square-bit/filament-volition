@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.3|^8.4",
-        "filament/filament": "^4.2",
+        "filament/filament": "^4.1",
         "illuminate/contracts": "^11.0|^12.0",
         "spatie/laravel-package-tools": "^1",
         "square-bit/laravel-volition": "^12.0"
