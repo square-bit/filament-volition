@@ -12,7 +12,7 @@ class ElementPayloadActions
         return function (array $data): array {
             /** @var IsFilamentElement $payloadClass */
             $payloadClass = $data['payload'][0]['type'];
-            $payloadData = $data['payload'][0]['data'];
+            $payloadData = $data['payload'][0]['data'] ?? [];
 
             $data['payload'] = $payloadClass::fromFilamentFormData($payloadData);
 
