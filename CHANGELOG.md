@@ -2,6 +2,10 @@
 
 All notable changes to `filament-volition` will be documented in this file.
 
+## Bug-fixes - 2026-03-04
+
+**Full Changelog**: https://github.com/square-bit/filament-volition/compare/v12.2...v12.3
+
 ## Support Filament v5 - 2026-02-09
 
 ### What's Changed
